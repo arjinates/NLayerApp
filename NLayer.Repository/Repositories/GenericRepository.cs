@@ -29,14 +29,15 @@ namespace NLayer.Repository.Repositories
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> exp)
         {
-           return await _dbSet.AnyAsync(exp);
+             return await _dbSet.AnyAsync(exp);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> exp)
+        public IQueryable<T> GetAll()
         {
             return  _dbSet.AsNoTracking().AsQueryable();
         }

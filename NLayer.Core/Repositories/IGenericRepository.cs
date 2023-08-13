@@ -11,7 +11,7 @@ namespace NLayer.Core.Repositories
     {
         Task<T> GetByIdAsync(int id);
 
-        IQueryable<T> GetAll(Expression<Func<T, bool>> exp);
+        IQueryable<T> GetAll();
 
         //IQueryable donen seylerde veritabanına sorgu atilmaz, toList'e kadar olan tum kosullar
         //memory'de birlestirilir ve toList ile birlikte tek seferde veritabanına gönderilir
