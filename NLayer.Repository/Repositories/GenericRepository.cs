@@ -11,7 +11,7 @@ namespace NLayer.Repository.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly AppDbContext _context; //readonly objeler ancak bu satirdaki gibi ilk
+        protected readonly AppDbContext _context; //readonly objelere ancak bu satirdaki gibi ilk
         private readonly DbSet<T> _dbSet;         //olusturulduklarında ya da constructure'da
                                                   //deger atayabiliriz
 

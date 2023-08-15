@@ -14,13 +14,13 @@ namespace NLayer.Core.DTOs
         public int StatusCode { get; set; }
         public List<String> Errors { get; set; }
 
-        //static factory methoddesign pattern
+        //static factory method design pattern
         public static CustomResponseDto<T> Success(int statusCode, T data)//create durumu olarak dusunulebilir
         {
             return new CustomResponseDto<T> { Data = data, StatusCode = statusCode };
         }
 
-        public static CustomResponseDto<T> Success(int statusCode) //update durumunda data donmeye gerek yok
+        public static CustomResponseDto<T> Success(int statusCode) //update ve delete durumunda data donmeye gerek yok
         {
             return new CustomResponseDto<T> { StatusCode = statusCode };
         }
