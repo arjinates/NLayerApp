@@ -14,8 +14,7 @@ namespace NLayer.Repository.Repositories
         protected readonly AppDbContext _context; //readonly objelere ancak bu satirdaki gibi ilk
         private readonly DbSet<T> _dbSet;         //olusturulduklarında ya da constructure'da
                                                   //deger atayabiliriz
-
-        public GenericRepository(AppDbContext context, DbSet<T> dbSet)
+        public GenericRepository(AppDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
@@ -49,7 +48,7 @@ namespace NLayer.Repository.Repositories
 
         public void remove(T entity)
         {
-             _dbSet.Remove(entity); //asenkron metodu yok, bu entity'nin state'sini deleted olarak koyuyor
+             _dbSet.Remove(entity); //asenkron metodu yok, bu entity'nin state'sini deleted olarak isaretliyor
                                     //yani bir flag koyuyor aslında, savaChanges() metodu cagrildiginda
         }                           //deleted flagleri bulup, db'den siliyor
                                     //yaptigi sey >> _context.Entry(entity).State=EntityState.Deleted; 
