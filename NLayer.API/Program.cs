@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
@@ -7,6 +9,7 @@ using NLayer.Repository.Repositories;
 using NLayer.Repository.UnitOfWork;
 using NLayer.Service.Mapping;
 using NLayer.Service.Services;
+using NLayer.Service.Validation;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +31,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<ProductDtoValidator>();
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
