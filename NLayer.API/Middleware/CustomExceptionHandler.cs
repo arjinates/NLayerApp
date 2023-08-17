@@ -9,7 +9,7 @@ namespace NLayer.API.Middleware
     { //bir extension method yazabilmek icin method static olmak zorunda, bu yuzden
       //class da static olmak durumunda
 
-        public static void UserCustomException(this IApplicationBuilder app)
+        public static void UseCustomException(this IApplicationBuilder app)
         {
             app.UseExceptionHandler(config =>
             {
@@ -22,6 +22,7 @@ namespace NLayer.API.Middleware
                     var statusCode = exceptionFeature.Error switch
                     {
                         ClientSideException => 400,
+                        NotFoundException => 404,
                         _ => 500
                     };
                     context.Response.StatusCode = statusCode;
