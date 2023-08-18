@@ -45,7 +45,7 @@ namespace NLayer.API.Controllers
         public async Task<IActionResult> Remove(int id)
         {
             await _productService.removeAsync(await _productService.GetByIdAsync(id));
-            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(200)); //remove ile update bir sey donmediginden NoContentDto donuyoruz
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204)); //remove ile update bir sey donmediginden NoContentDto donuyoruz
         }
 
         [HttpPost]

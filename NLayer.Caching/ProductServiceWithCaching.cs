@@ -36,7 +36,7 @@ namespace NLayer.Caching
 
             if (!_memoryCache.TryGetValue(CacheProductKey, out _)) //sadece cache'de data var mi yok mu onu ogrenmek istiyoruz varsa data donsun 
             {                                                      //istemiyoruz, bu yüzden out _ kullandık memoryde bosuna allocate etmesin diye
-                _memoryCache.Set(CacheProductKey, _repository.GetProductsWithCategory()); //yok ise memoryCache'e CacheProductKey'e repodaki datalari set et
+                _memoryCache.Set(CacheProductKey, _repository.GetProductsWithCategory().Result); //yok ise memoryCache'e CacheProductKey'e repodaki datalari set et
             }
         }
 
@@ -63,7 +63,8 @@ namespace NLayer.Caching
 
         public  Task<IEnumerable<Product>> GetAllAsync()
         {
-            return Task.FromResult(_memoryCache.Get<IEnumerable<Product>>(CacheProductKey));
+            var products = _memoryCache.Get<IEnumerable<Product>>(CacheProductKey);
+            return Task.FromResult(products);
         }
 
         public Task<Product> GetByIdAsync(int id)
