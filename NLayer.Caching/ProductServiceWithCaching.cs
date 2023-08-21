@@ -7,13 +7,7 @@ using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
 using NLayer.Service.Exceptions;
-using NLayer.Service.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLayer.Caching
 {
@@ -44,7 +38,7 @@ namespace NLayer.Caching
         {
             await _repository.AddAsync(entity);
             await _unitOfWork.CommitAsync();
-            await CacheAllProductsAsync();   
+            await CacheAllProductsAsync();
             return entity;
         }
 
@@ -52,7 +46,7 @@ namespace NLayer.Caching
         {
             await _repository.AddRangeAsync(entities);
             await _unitOfWork.CommitAsync();
-            await CacheAllProductsAsync();  
+            await CacheAllProductsAsync();
             return entities;
         }
 
@@ -61,7 +55,7 @@ namespace NLayer.Caching
             return Task.FromResult(_memoryCache.Get<List<Product>>(CacheProductKey).Any(exp.Compile()));
         }
 
-        public  Task<IEnumerable<Product>> GetAllAsync()
+        public Task<IEnumerable<Product>> GetAllAsync()
         {
             var products = _memoryCache.Get<IEnumerable<Product>>(CacheProductKey);
             return Task.FromResult(products);
@@ -80,7 +74,7 @@ namespace NLayer.Caching
 
         public Task<List<ProductWithCategoryDto>> GetProductsWithCategory()
         {
-           var products = _memoryCache.Get<IEnumerable<Product>>(CacheProductKey);
+            var products = _memoryCache.Get<IEnumerable<Product>>(CacheProductKey);
 
             var producstWithCategoryDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
 
@@ -91,7 +85,7 @@ namespace NLayer.Caching
         {
             _repository.remove(entity);
             await _unitOfWork.CommitAsync();
-            await CacheAllProductsAsync();  
+            await CacheAllProductsAsync();
         }
 
         public async Task RemoveRangeAsync(IEnumerable<Product> entities)
@@ -115,7 +109,7 @@ namespace NLayer.Caching
 
         public async Task CacheAllProductsAsync() //cok sık degistirmeyecegimiz fakat cok sık erisecegimiz data en uygun cache adayidir
         {
-           _memoryCache.Set(CacheProductKey, await _repository.GetAll().ToListAsync());
+            _memoryCache.Set(CacheProductKey, await _repository.GetAll().ToListAsync());
         }
     }
 }
