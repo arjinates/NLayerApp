@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLayer.Repository.Repositories
 {
@@ -33,12 +28,12 @@ namespace NLayer.Repository.Repositories
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> exp)
         {
-             return await _dbSet.AnyAsync(exp);
+            return await _dbSet.AnyAsync(exp);
         }
 
         public IQueryable<T> GetAll()
         {
-            return  _dbSet.AsNoTracking().AsQueryable();
+            return _dbSet.AsNoTracking().AsQueryable();
         }
 
         public async Task<T> GetByIdAsync(int id)
@@ -48,8 +43,8 @@ namespace NLayer.Repository.Repositories
 
         public void remove(T entity)
         {
-             _dbSet.Remove(entity); //asenkron metodu yok, bu entity'nin state'sini deleted olarak isaretliyor
-                                    //yani bir flag koyuyor aslında, savaChanges() metodu cagrildiginda
+            _dbSet.Remove(entity); //asenkron metodu yok, bu entity'nin state'sini deleted olarak isaretliyor
+                                   //yani bir flag koyuyor aslında, savaChanges() metodu cagrildiginda
         }                           //deleted flagleri bulup, db'den siliyor
                                     //yaptigi sey >> _context.Entry(entity).State=EntityState.Deleted; 
         public void RemoveRange(IEnumerable<T> entities)
