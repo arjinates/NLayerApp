@@ -11,7 +11,7 @@ namespace NLayer.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<CategoryDto>> GetAll()
+        public async Task<List<CategoryDto>> GetAllAsync()
         {
             var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<List<CategoryDto>>>("categories");
             return response.Data;

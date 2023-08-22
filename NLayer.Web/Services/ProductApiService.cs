@@ -12,7 +12,7 @@ namespace NLayer.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<ProductWithCategoryDto>> GetProductWithCategory()
+        public async Task<List<ProductWithCategoryDto>> GetProductsWithCategoryAsync()
         {
             await _httpClient.GetAsync("products/GetProductsWithCategory");
             var response = await _httpClient
